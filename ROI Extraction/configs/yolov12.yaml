@@ -1,0 +1,107 @@
+# YOLOv11 configuration for oral cancer detection
+
+# Path to dataset.yaml
+path: ../data/processed/dataset.yaml
+# Training settings
+train:
+  epochs: 300
+  batch: 16  # Batch size
+  imgsz: 640  # Image size for training
+  device: ''  # CUDA device, i.e. 0 or 0,1,2,3 or cpu
+  workers: 8  # Maximum number of dataloader workers
+  optimizer: 'auto'  # Optimizer: SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto
+  lr0: 0.01  # Initial learning rate
+  lrf: 0.01  # Final learning rate as a percentage of lr0
+  momentum: 0.937  # SGD momentum/Adam beta1
+  weight_decay: 0.0005  # Optimizer weight decay
+  warmup_epochs: 3.0  # Warmup epochs (fractions ok)
+  warmup_momentum: 0.8  # Warmup initial momentum
+  warmup_bias_lr: 0.1  # Warmup initial bias lr
+  box: 7.5  # Box loss gain
+  cls: 0.5  # Classification loss gain (scale with pixels)
+  dfl: 1.5  # Distribution focal loss gain
+  close_mosaic: 10  # Close dataloader mosaic at epoch 10 for final tuning
+  overlap_mask: True  # Masks should overlap during training (segment train only)
+  mask_ratio: 4  # Mask size downsampling ratio (segment train only)
+  patience: 50  # EarlyStopping patience (epochs without improvement)
+  cache: False  # Cache images for faster training
+  resume: False  # Resume training from last checkpoint
+  save_period: 10  # Save checkpoint every x epochs (disabled if < 1)
+  freeze: [0]  # Freeze layers: backbone=10, first3=0 1 2
+
+# Validation settings
+val:
+  imgsz: 640  # Image size for validation
+  batch: 8  # Batch size for validation
+  split: val  # Validation dataset to use (train, val, test)
+  max_det: 300  # Maximum detections per image
+  iou: 0.7  # NMS IoU threshold
+  conf: 0.001  # NMS confidence threshold
+  overlap_mask: True  # Masks should overlap during validation
+
+# Model settings
+model:
+  cfg: yolov12.yaml  # YOLOv11 model configuration file
+  weights: ''  # Initial weights path
+  pretrained: True  # Use pretrained model
+  backbone_weights: ''  # Use backbone pretrained weights if available
+
+# Augmentation settings
+augment:
+  hsv_h: 0.015  # HSV-Hue augmentation
+  hsv_s: 0.7  # HSV-Saturation augmentation
+  hsv_v: 0.4  # HSV-Value (brightness) augmentation
+  degrees: 15.0  # Rotation (+/- deg)
+  translate: 0.1  # Translation (+/- fraction)
+  scale: 0.5  # Scale (+/- gain)
+  shear: 10.0  # Shear (+/- deg)
+  perspective: 0.0005  # Perspective (+/- fraction)
+  flipud: 0.0  # Flip up-down (probability)
+  fliplr: 0.5  # Flip left-right (probability)
+  mosaic: 1.0  # Mosaic (probability)
+  mixup: 0.0  # Mixup (probability)
+  copy_paste: 0.0  # Copy-paste (probability)
+
+# Prediction settings
+predict:
+  imgsz: 640 # Image size for inference
+  conf: 0.25  # Confidence threshold
+  iou: 0.45  # NMS IoU threshold
+  max_det: 300  # Maximum detections per image
+  device: ''  # CUDA device, i.e. 0 or 0,1,2,3 or cpu
+  view_img: False  # Show results
+  save_txt: True  # Save results to *.txt
+  save_conf: True  # Save confidences in --save-txt labels
+  save_crop: False  # Save cropped prediction boxes
+  save_masks: True  # Save masks
+  line_thickness: 3  # Bounding box thickness (pixels)
+  hide_labels: False  # Hide labels
+  hide_conf: False  # Hide confidences
+  half: False  # Use FP16 half-precision inference
+  dnn: False  # Use OpenCV DNN for ONNX inference
+  vid_stride: 1  # Video frame-rate stride
+  retina_masks: False  # Use high-resolution segmentation masks
+
+# Format settings
+format: YOLO  # Output format (YOLO, TensorFlow, Torch, OpenVINO, CoreML, etc.)
+
+# Hyperparameters for evolving
+hyp:
+  box: 0.05  # Box iou loss gain
+  cls: 0.5  # Cls loss gain
+  dfl: 1.5  # Distribution focal loss gain
+  hsv_h: 0.015  # Hue augmentation
+  hsv_s: 0.7  # Saturation augmentation
+  hsv_v: 0.4  # Value augmentation
+  degrees: 0.0  # Rotation
+  translate: 0.1  # Translation
+  scale: 0.5  # Scale
+  fliplr: 0.5  # Horizontal flip
+  mosaic: 1.0  # Mosaic
+  mixup: 0.0  # Mixup
+
+# Logging settings
+project: oral_cancer  # Project name
+name: yolov12_detection  # Experiment name
+exist_ok: False  # Overwrite existing experiment directory
+save: True  # Save train checkpoints and predictions 

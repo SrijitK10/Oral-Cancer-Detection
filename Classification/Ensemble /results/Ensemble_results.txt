@@ -1,0 +1,20 @@
+Model: Ensemble
+
+Confusion Matrix:
+         Benign  Healthy  OCA  OPMD
+Benign       26        3    2    44
+Healthy       6       34    1    32
+OCA           3        0    4     6
+OPMD          9        4    4   123
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.59      0.35      0.44        75
+     Healthy       0.83      0.47      0.60        73
+         OCA       0.36      0.31      0.33        13
+        OPMD       0.60      0.88      0.71       140
+
+    accuracy                           0.62       301
+   macro avg       0.60      0.50      0.52       301
+weighted avg       0.64      0.62      0.60       301

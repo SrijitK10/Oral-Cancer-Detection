@@ -1,0 +1,33 @@
+# Default configuration for DM-Net Oral Cancer Classification
+
+data:
+  data_dir: "./organized_dataset"
+  train_dir: "augmented_train"
+  val_dir: "val"
+  test_dir: "test"
+  batch_size: 32
+  num_workers: 4
+  image_size: 224
+
+model:
+  architecture: "swin_tiny_patch4_window7_224"
+  pretrained: true
+  num_classes: 4
+  checkpoint_path: "best_swin_tiny.pth"  # Updated to match original config
+
+training:
+  num_epochs: 30
+  learning_rate: 1e-4
+  optimizer: "adamw"
+  weight_decay: 0.01
+  scheduler: "cosine"
+  early_stopping_patience: 5
+  
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "confusion_matrix", "roc_curve"]
+  output_dir: "results"
+  
+visualization:
+  plot_dir: "training_plots"
+  save_confusion_matrix: true
+  save_roc_curve: true

@@ -1,0 +1,21 @@
+# Testing-specific configuration for DM-Net Oral Cancer Classification
+
+data:
+  batch_size: 64
+  augmentation: false
+  
+model:
+  checkpoint_path: "best_model.pth"
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "confusion_matrix", "roc_curve"]
+  output_dir: "test_results"
+  save_predictions: true
+  predictions_file: "predictions.csv"
+  
+visualization:
+  plot_dir: "test_visualizations"
+  save_confusion_matrix: true
+  save_roc_curve: true
+  save_misclassified: true
+  save_gradcam: true

@@ -1,0 +1,46 @@
+# Main configuration file for Oral Cancer Classification Pipeline
+
+# Dataset configuration
+dataset:
+  base_dir: './organized_dataset'
+  img_height: 224
+  img_width: 224
+  batch_size: 32
+  
+# Training configuration
+training:
+  epochs: 30
+  learning_rate: 0.001
+  validation_split: 0.2
+  early_stopping_patience: 5
+  
+# Model configuration
+models:
+  save_dir: './models'
+  baseline_model: true
+  transfer_learning_models:
+    - 'ResNet50'
+    - 'EfficientNetB3'
+    - 'MobileNetV2'
+    - 'DenseNet121'
+  create_ensemble: true
+
+# Data augmentation configuration
+augmentation:
+  rotation_range: 20
+  width_shift_range: 0.2
+  height_shift_range: 0.2
+  shear_range: 0.15
+  zoom_range: 0.2
+  horizontal_flip: true
+  vertical_flip: false
+  fill_mode: 'nearest'
+  brightness_range: [0.8, 1.2]
+  channel_shift_range: 0.1
+  
+# Results and output configuration
+output:
+  results_dir: './results'
+  save_confusion_matrix: true
+  save_classification_report: true
+  save_training_plots: true
